@@ -240,6 +240,30 @@ export default function Home() {
         </p>
         <p className="mt-2 text-[10px] opacity-50">Not affiliated with Google Cloud.</p>
       </footer>
+
+      {/* Structural Data for SEO (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Google Cloud Arcade Points Calculator 2026",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
+            "author": {
+              "@type": "Person",
+              "name": "Somesh Tiwari"
+            }
+          }),
+        }}
+      />
     </main>
   );
 }
