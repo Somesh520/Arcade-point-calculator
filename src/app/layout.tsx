@@ -17,6 +17,9 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "ArcadeCalc Clone",
   description: "Calculate your Google Cloud Arcade Points",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
