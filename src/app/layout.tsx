@@ -15,10 +15,17 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "ArcadeCalc Clone",
-  description: "Calculate your Google Cloud Arcade Points",
+  title: "Google Cloud Arcade Points Calculator 2026 | Somesh Tiwari",
+  description: "Calculate your Google Cloud Arcade Points instantly. Track Game Badges, Trivia Badges, and Skill Badges for the 2026 Season. Join the Arcade Army!",
+  keywords: ["Google Cloud Arcade", "Arcade Points Calculator", "Cloud Skills Boost", "Arcade 2026", "Google Arcade Swag", "Skill Badges", "Arcade Calculator"],
+  authors: [{ name: "Somesh Tiwari", url: "https://github.com/Somesh520" }],
   icons: {
     icon: '/icon.png',
+  },
+  openGraph: {
+    title: "Arcade Points Calculator 2026",
+    description: "Check your progress for the Google Cloud Arcade 2026 Season.",
+    type: "website",
   },
 };
 
