@@ -48,13 +48,9 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-12 max-w-3xl flex flex-col items-center"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo.png"
-          alt="2026 Arcade Calculator"
-          className="w-full max-w-[400px] md:max-w-[500px] h-auto mb-6 neon-drop-shadow"
-        />
-        <h1 className="sr-only">2026 ARCADE CALCULATOR</h1>
+        <h1 className="text-3xl md:text-5xl font-[family-name:var(--font-press-start)] mb-6 neon-text-pink leading-normal py-4">
+          2026 ARCADE CALCULATOR
+        </h1>
         <p className="text-gray-400 text-lg md:text-xl">
           Track your Google Cloud Arcade progress, calculate points, and verify milestones.
         </p>
