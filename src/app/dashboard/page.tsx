@@ -139,20 +139,41 @@ function DashboardContent() {
                     <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                         <CheckCircle className="text-[var(--color-neon-green)]" /> Milestones Progress
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                         {[
-                            { name: "Milestone 1 (10+ pts)", reached: result.stats.milestones1 },
-                            { name: "Milestone 2 (25+ pts)", reached: result.stats.milestones2 },
-                            { name: "Milestone 3 (50+ pts)", reached: result.stats.milestones3 },
-                            { name: "Ultimate Milestone (70+ pts)", reached: result.stats.ultimateMilestone },
-                        ].map((m, i) => (
-                            <div key={i} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
-                                <span className={m.reached ? "text-white" : "text-gray-500"}>{m.name}</span>
-                                <span className={`px-3 py-1 rounded text-xs font-bold ${m.reached ? "bg-green-500/20 text-green-400" : "bg-gray-800 text-gray-500"}`}>
-                                    {m.reached ? "COMPLETED" : "LOCKED"}
-                                </span>
-                            </div>
-                        ))}
+                            { name: "Milestone 1", target: 10, reached: result.stats.milestones1 },
+                            { name: "Milestone 2", target: 25, reached: result.stats.milestones2 },
+                            { name: "Milestone 3", target: 50, reached: result.stats.milestones3 },
+                            { name: "Ultimate Milestone", target: 70, reached: result.stats.ultimateMilestone },
+                        ].map((m, i) => {
+                            const progress = Math.min(100, Math.max(0, (result.stats.totalPoints / m.target) * 100));
+
+                            return (
+                                <div key={i} className="bg-black/20 rounded-lg p-4">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <span className={m.reached ? "text-white font-bold" : "text-gray-400"}>
+                                            {m.name} <span className="text-xs opacity-70">({m.target}+ pts)</span>
+                                        </span>
+                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${m.reached ? "bg-green-500/20 text-green-400" : "bg-gray-800 text-gray-500"}`}>
+                                            {m.reached ? "COMPLETED" : "LOCKED"}
+                                        </span>
+                                    </div>
+
+                                    {/* Progress Bar */}
+                                    <div className="w-full bg-gray-800 rounded-full h-2.5 mb-1 overflow-hidden">
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${progress}%` }}
+                                            transition={{ duration: 1, ease: "easeOut" }}
+                                            className={`h-2.5 rounded-full ${m.reached ? "bg-[var(--color-neon-green)]" : "bg-[var(--color-neon-pink)]"}`}
+                                        ></motion.div>
+                                    </div>
+                                    <p className="text-right text-[10px] text-gray-400">
+                                        {Math.min(result.stats.totalPoints, m.target)} / {m.target} PTS
+                                    </p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </motion.div>
