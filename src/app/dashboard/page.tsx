@@ -7,7 +7,6 @@ import html2canvas from "html2canvas";
 import confetti from "canvas-confetti";
 import { ResultData } from "../../types";
 import { motion } from "framer-motion";
-import { ResultData } from "../../types";
 
 function DashboardContent() {
     const searchParams = useSearchParams();
