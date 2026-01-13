@@ -243,41 +243,60 @@ export default function Home() {
             </ul>
           </section>
         </div>
-      </section>
 
-    </motion.div>
+        {/* INSTALL APP SECTION */}
+        <section className="arcade-card p-8 rounded-xl border-t-2 border-[var(--color-neon-cyan)] mt-8 text-center bg-black/40">
+          <h2 className="text-xl font-[family-name:var(--font-press-start)] mb-2 text-white">
+            📲 INSTALL THE APP
+          </h2>
+          <p className="text-gray-400 text-sm mb-6 max-w-lg mx-auto">
+            For the best experience, install Arcade Calc on your device. It works offline and feels like a native app!
+          </p>
+          <div className="flex flex-col md:flex-row justify-center gap-6">
+            <div className="bg-white/5 p-4 rounded-lg border border-white/10 flex-1 max-w-xs mx-auto">
+              <strong className="text-[var(--color-neon-green)] block mb-2 font-bold font-[family-name:var(--font-press-start)] text-xs">ANDROID / CHROME</strong>
+              <p className="text-xs text-gray-300">Tap <span className="text-white bg-white/20 px-1 rounded">⋮</span> menu &gt; select <span className="text-white bg-white/20 px-1 rounded">Install App</span></p>
+            </div>
+            <div className="bg-white/5 p-4 rounded-lg border border-white/10 flex-1 max-w-xs mx-auto">
+              <strong className="text-[var(--color-neon-blue)] block mb-2 font-bold font-[family-name:var(--font-press-start)] text-xs">iOS / SAFARI</strong>
+              <p className="text-xs text-gray-300">Tap <span className="text-white bg-white/20 px-1 rounded">Share</span> &gt; select <span className="text-white bg-white/20 px-1 rounded">Add to Home Screen</span></p>
+            </div>
+          </div>
+        </section>
 
-      {/* Footer */ }
-  <footer className="w-full text-center mt-20 pb-8 text-gray-500 text-xs font-[family-name:var(--font-outfit)]">
-    <p>
-      DEVELOPED BY <span className="text-[var(--color-neon-cyan)] animate-pulse">SOMESH TIWARI</span> | 2026 SEASON
-    </p>
-    <p className="mt-2 text-[10px] opacity-50">Not affiliated with Google Cloud.</p>
-  </footer>
+      </motion.div>
 
-  {/* Structural Data for SEO (JSON-LD) */ }
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Google Cloud Arcade Points Calculator 2026",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
-        "author": {
-          "@type": "Person",
-          "name": "Somesh Tiwari"
-        }
-      }),
-    }}
-  />
+      {/* Footer */}
+      <footer className="w-full text-center mt-20 pb-8 text-gray-500 text-xs font-[family-name:var(--font-outfit)]">
+        <p>
+          DEVELOPED BY <span className="text-[var(--color-neon-cyan)] animate-pulse">SOMESH TIWARI</span> | 2026 SEASON
+        </p>
+        <p className="mt-2 text-[10px] opacity-50">Not affiliated with Google Cloud.</p>
+      </footer>
+
+      {/* Structural Data for SEO (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Google Cloud Arcade Points Calculator 2026",
+            "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "Web",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
+            "author": {
+              "@type": "Person",
+              "name": "Somesh Tiwari"
+            }
+          }),
+        }}
+      />
     </main >
   );
 }
