@@ -242,41 +242,49 @@ export default function Home() {
               <li>Skill Badges are the fastest way to rack up points!</li>
             </ul>
           </section>
-        </div>
+          <div className="flex flex-col md:flex-row justify-center gap-4 text-xs text-gray-400">
+            <div className="bg-black/30 p-3 rounded border border-white/10">
+              <strong className="text-white block mb-1">Android / Chrome</strong>
+              Click the <span className="text-white">⋮ menu</span> &gt; <span className="text-white">Install App</span>
+            </div>
+            <div className="bg-black/30 p-3 rounded border border-white/10">
+              <strong className="text-white block mb-1">iOS / Safari</strong>
+              Click <span className="text-white">Share</span> &gt; <span className="text-white">Add to Home Screen</span>
+            </div>
+          </div>
+        </section>
 
-      </motion.div>
+        {/* Footer */}
+        <footer className="row-start-3 max-w-2xl mx-auto text-center text-xs text-gray-500 font-[family-name:var(--font-outfit)] mt-20">
+          <p>
+            DEVELOPED BY <span className="text-[var(--color-neon-cyan)] animate-pulse">SOMESH TIWARI</span> | 2026 SEASON
+          </p>
+          <p className="mt-2 text-[10px] opacity-50">Not affiliated with Google Cloud.</p>
+        </footer>
 
-      {/* Footer */}
-      <footer className="w-full text-center mt-20 pb-8 text-gray-500 text-xs font-[family-name:var(--font-press-start)]">
-        <p>
-          DEVELOPED BY <span className="text-[var(--color-neon-cyan)] animate-pulse">SOMESH TIWARI</span> | 2026 SEASON
-        </p>
-        <p className="mt-2 text-[10px] opacity-50">Not affiliated with Google Cloud.</p>
-      </footer>
-
-      {/* Structural Data for SEO (JSON-LD) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "Google Cloud Arcade Points Calculator 2026",
-            "applicationCategory": "UtilitiesApplication",
-            "operatingSystem": "Web",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
-            "author": {
-              "@type": "Person",
-              "name": "Somesh Tiwari"
-            }
-          }),
-        }}
-      />
+        {/* Structural Data for SEO (JSON-LD) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Google Cloud Arcade Points Calculator 2026",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
+              "author": {
+                "@type": "Person",
+                "name": "Somesh Tiwari"
+              }
+            }),
+          }}
+        />
     </main>
   );
 }
