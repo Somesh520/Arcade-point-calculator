@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, Trash2 } from "lucide-react";
+import { Search, Trash2, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface SavedProfile {
   name: string;
@@ -139,6 +140,18 @@ export default function Home() {
         transition={{ delay: 0.8 }}
         className="w-full max-w-4xl mt-20 space-y-12"
       >
+        {/* Full Guide Banner */}
+        <div className="text-center mb-16">
+          <Link href="/guide">
+            <button className="pixel-button bg-[var(--color-neon-yellow)] text-black px-6 py-4 rounded font-bold hover:scale-105 transition-transform flex items-center gap-3 mx-auto animate-pulse shadow-[0_0_20px_var(--color-neon-yellow)]">
+              <BookOpen size={24} /> READ OFFICIAL 2026 GUIDE
+            </button>
+          </Link>
+          <p className="mt-4 text-gray-400 text-sm font-[family-name:var(--font-outfit)]">
+            Everything you need to know: Rules, Dates & Points System
+          </p>
+        </div>
+
         {/* What is Arcade? */}
         <section>
           <h2 className="text-2xl font-[family-name:var(--font-press-start)] mb-6 text-[var(--color-neon-cyan)]">
