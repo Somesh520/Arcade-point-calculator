@@ -2,7 +2,10 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Trophy, Medal, Award, CheckCircle, ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen, Share2, Download, CheckCircle, Trophy, Medal, Award } from "lucide-react";
+import html2canvas from "html2canvas";
+import confetti from "canvas-confetti";
+import { ResultData } from "../../types";
 import { motion } from "framer-motion";
 import { ResultData } from "../../types";
 
@@ -135,45 +138,79 @@ function DashboardContent() {
                 </div>
 
                 {/* Milestones */}
-                <div className="arcade-card p-8 rounded-2xl">
+                {/* Swag Tiers */}
+                <div className="arcade-card p-8 rounded-2xl mb-8">
                     <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                        <CheckCircle className="text-[var(--color-neon-green)]" /> Milestones Progress
+                        <Trophy className="text-[var(--color-neon-yellow)]" /> Swag Eligibility
                     </h3>
                     <div className="space-y-6">
                         {[
-                            { name: "Milestone 1", target: 10, reached: result.stats.milestones1 },
-                            { name: "Milestone 2", target: 25, reached: result.stats.milestones2 },
-                            { name: "Milestone 3", target: 50, reached: result.stats.milestones3 },
-                            { name: "Ultimate Milestone", target: 70, reached: result.stats.ultimateMilestone },
-                        ].map((m, i) => {
-                            const progress = Math.min(100, Math.max(0, (result.stats.totalPoints / m.target) * 100));
-
+                            { name: "Arcade Novice", target: 25, reached: result.stats.milestones.swag.novice },
+                            { name: "Arcade Trooper", target: 45, reached: result.stats.milestones.swag.trooper },
+                            { name: "Arcade Ranger", target: 65, reached: result.stats.milestones.swag.ranger },
+                            { name: "Arcade Champion", target: 75, reached: result.stats.milestones.swag.champion },
+                            { name: "Arcade Legend", target: 95, reached: result.stats.milestones.swag.legend },
+                        ].map((tier, i) => {
+                            const progress = Math.min(100, Math.max(0, (result.stats.totalPoints / tier.target) * 100));
                             return (
-                                <div key={i} className="bg-black/20 rounded-lg p-4">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className={m.reached ? "text-white font-bold" : "text-gray-400"}>
-                                            {m.name} <span className="text-xs opacity-70">({m.target}+ pts)</span>
+                                <div key={i} className="mb-4">
+                                    <div className="flex justify-between text-sm mb-1">
+                                        <span className={tier.reached ? "text-[var(--color-neon-yellow)] font-bold" : "text-gray-400"}>
+                                            {tier.name} ({tier.target} pts)
                                         </span>
-                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${m.reached ? "bg-green-500/20 text-green-400" : "bg-gray-800 text-gray-500"}`}>
-                                            {m.reached ? "COMPLETED" : "LOCKED"}
+                                        <span className={tier.reached ? "text-green-400" : "text-gray-600"}>
+                                            {tier.reached ? "UNLOCKED" : "LOCKED"}
                                         </span>
                                     </div>
-
-                                    {/* Progress Bar */}
-                                    <div className="w-full bg-gray-800 rounded-full h-2.5 mb-1 overflow-hidden">
+                                    <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
                                         <motion.div
                                             initial={{ width: 0 }}
                                             animate={{ width: `${progress}%` }}
-                                            transition={{ duration: 1, ease: "easeOut" }}
-                                            className={`h-2.5 rounded-full ${m.reached ? "bg-[var(--color-neon-green)]" : "bg-[var(--color-neon-pink)]"}`}
-                                        ></motion.div>
+                                            className={`h-full ${tier.reached ? "bg-[var(--color-neon-yellow)]" : "bg-gray-600"}`}
+                                        />
                                     </div>
-                                    <p className="text-right text-[10px] text-gray-400">
-                                        {Math.min(result.stats.totalPoints, m.target)} / {m.target} PTS
-                                    </p>
                                 </div>
                             );
                         })}
+                    </div>
+                </div>
+
+                {/* Facilitator Milestones */}
+                <div className="arcade-card p-8 rounded-2xl">
+                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                        <CheckCircle className="text-[var(--color-neon-cyan)]" /> Facilitator Milestones
+                    </h3>
+                    <div className="grid gap-4 md:grid-cols-2">
+                        {[
+                            {
+                                name: "Milestone 1",
+                                reached: result.stats.milestones.facilitator.m1,
+                                req: "6 Game, 5 Trivia, 14 Skill, 6 Lab Free"
+                            },
+                            {
+                                name: "Milestone 2",
+                                reached: result.stats.milestones.facilitator.m2,
+                                req: "8 Game, 6 Trivia, 28 Skill, 12 Lab Free"
+                            },
+                            {
+                                name: "Milestone 3",
+                                reached: result.stats.milestones.facilitator.m3,
+                                req: "10 Game, 7 Trivia, 38 Skill, 18 Lab Free"
+                            },
+                            {
+                                name: "Ultimate Milestone",
+                                reached: result.stats.milestones.facilitator.ultimate,
+                                req: "12 Game, 8 Trivia, 52 Skill, 24 Lab Free"
+                            },
+                        ].map((m, i) => (
+                            <div key={i} className={`p-4 rounded-lg border ${m.reached ? "border-[var(--color-neon-green)] bg-[var(--color-neon-green)]/10" : "border-gray-700 bg-black/40"}`}>
+                                <div className="flex justify-between items-center mb-2">
+                                    <h4 className={`font-bold ${m.reached ? "text-white" : "text-gray-400"}`}>{m.name}</h4>
+                                    {m.reached ? <CheckCircle size={16} className="text-[var(--color-neon-green)]" /> : <div className="w-4 h-4 rounded-full border border-gray-600" />}
+                                </div>
+                                <p className="text-[10px] text-gray-500">{m.req}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </motion.div>

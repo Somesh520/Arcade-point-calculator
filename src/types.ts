@@ -11,10 +11,22 @@ export interface ResultData {
         gameBadges: number;
         triviaBadges: number;
         skillBadges: number;
-        milestones1: boolean;
-        milestones2: boolean;
-        milestones3: boolean;
-        ultimateMilestone: boolean;
+        courseBadges: number; // For Lab Free
+        milestones: {
+            facilitator: {
+                m1: boolean;
+                m2: boolean;
+                m3: boolean;
+                ultimate: boolean;
+            };
+            swag: {
+                novice: boolean;
+                trooper: boolean;
+                ranger: boolean;
+                champion: boolean;
+                legend: boolean;
+            };
+        };
     };
     badges: Badge[];
     user: {

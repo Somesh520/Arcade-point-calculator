@@ -14,10 +14,22 @@ interface CalculateResult {
     gameBadges: number;
     triviaBadges: number;
     skillBadges: number;
-    milestones1: boolean;
-    milestones2: boolean;
-    milestones3: boolean;
-    ultimateMilestone: boolean;
+    courseBadges: number;
+    milestones: {
+      facilitator: {
+        m1: boolean;
+        m2: boolean;
+        m3: boolean;
+        ultimate: boolean;
+      };
+      swag: {
+        novice: boolean;
+        trooper: boolean;
+        ranger: boolean;
+        champion: boolean;
+        legend: boolean;
+      };
+    };
   };
   badges: Badge[];
   user: {
@@ -90,6 +102,7 @@ export async function POST(req: Request) {
     const gameBadges = badges2026.filter(b => b.type === 'Game').length;
     const triviaBadges = badges2026.filter(b => b.type === 'Trivia').length;
     const skillBadges = badges2026.filter(b => b.type === 'Skill Badge').length;
+    const courseBadges = badges2026.filter(b => b.type === 'Course').length;
 
     // Points: Game=1, Trivia=1, SkillBadge = 1 pt per 2 badges (0.5 each)
     const skillPoints = Math.floor(skillBadges / 2);
@@ -97,16 +110,29 @@ export async function POST(req: Request) {
 
     const totalPoints = gameBadges + triviaBadges + skillPoints;
 
+    // Facilitator Milestones Logic (From Netlify App)
+    const m1 = gameBadges >= 6 && triviaBadges >= 5 && skillBadges >= 14 && courseBadges >= 6;
+    const m2 = gameBadges >= 8 && triviaBadges >= 6 && skillBadges >= 28 && courseBadges >= 12;
+    const m3 = gameBadges >= 10 && triviaBadges >= 7 && skillBadges >= 38 && courseBadges >= 18;
+    const ultimate = gameBadges >= 12 && triviaBadges >= 8 && skillBadges >= 52 && courseBadges >= 24;
+
     const result: CalculateResult = {
       stats: {
         totalPoints,
         gameBadges,
         triviaBadges,
         skillBadges,
-        milestones1: totalPoints >= 10, // Placeholder thresholds
-        milestones2: totalPoints >= 25,
-        milestones3: totalPoints >= 50,
-        ultimateMilestone: totalPoints >= 70,
+        courseBadges,
+        milestones: {
+          facilitator: { m1, m2, m3, ultimate },
+          swag: {
+            novice: totalPoints >= 25,
+            trooper: totalPoints >= 45,
+            ranger: totalPoints >= 65,
+            champion: totalPoints >= 75,
+            legend: totalPoints >= 95
+          }
+        }
       },
       badges,
       user: {

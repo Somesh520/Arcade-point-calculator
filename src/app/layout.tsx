@@ -21,6 +21,19 @@ export const metadata: Metadata = {
   authors: [{ name: "Somesh Tiwari", url: "https://github.com/Somesh520" }],
   icons: {
     icon: '/icon.png',
+    apple: '/icon.png',
+  },
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Arcade Calc",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false, // Prevents zooming for app-like feel
   },
   openGraph: {
     title: "Arcade Points Calculator 2026",
