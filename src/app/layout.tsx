@@ -15,15 +15,25 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://google-arcade-calculator-2026.vercel.app"),
   title: "Google Cloud Arcade Points Calculator 2026 | Somesh Tiwari",
-  description: "Calculate your Google Cloud Arcade Points instantly. Track Game Badges, Trivia Badges, and Skill Badges for the 2026 Season. Join the Arcade Army!",
-  keywords: ["Google Cloud Arcade", "Arcade Points Calculator", "Cloud Skills Boost", "Arcade 2026", "Google Arcade Swag", "Skill Badges", "Arcade Calculator"],
+  description:
+    "Calculate your Google Cloud Arcade Points instantly. Track Game Badges, Trivia Badges, and Skill Badges for the 2026 Season. Join the Arcade Army!",
+  keywords: [
+    "Google Cloud Arcade",
+    "Arcade Points Calculator",
+    "Cloud Skills Boost",
+    "Arcade 2026",
+    "Google Arcade Swag",
+    "Skill Badges",
+    "Arcade Calculator",
+  ],
   authors: [{ name: "Somesh Tiwari", url: "https://github.com/Somesh520" }],
   icons: {
-    icon: '/icon.png',
-    apple: '/icon.png',
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
-  manifest: '/manifest.webmanifest',
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -39,6 +49,23 @@ export const metadata: Metadata = {
     title: "Arcade Points Calculator 2026",
     description: "Check your progress for the Google Cloud Arcade 2026 Season.",
     type: "website",
+    url: "https://google-arcade-calculator-2026.vercel.app",
+    siteName: "Google Cloud Arcade Points Calculator 2026",
+    locale: "en_US",
+  },
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
