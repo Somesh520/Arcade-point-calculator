@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 // eslint-disable-next-line @next/next/no-page-custom-font
 import { Press_Start_2P, Outfit } from "next/font/google";
 import "./globals.css";
@@ -16,19 +16,25 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://google-arcade-calculator-2026.vercel.app"),
-  title: "Google Cloud Arcade Points Calculator 2026 | Somesh Tiwari",
+  title: {
+    default: "Arcade Calculator 2026 by Somesh Tiwari | Google Cloud Points",
+    template: "%s | Arcade Calculator 2026",
+  },
   description:
-    "Calculate your Google Cloud Arcade Points instantly. Track Game Badges, Trivia Badges, and Skill Badges for the 2026 Season. Join the Arcade Army!",
+    "The #1 Arcade Calculator for 2026 Season by Somesh Tiwari. Calculate your Google Cloud Arcade Points, track badges, and join the Arcade Army.",
   keywords: [
+    "Arcade Calculator",
+    "Somesh Tiwari",
     "Google Cloud Arcade",
     "Arcade Points Calculator",
     "Cloud Skills Boost",
     "Arcade 2026",
     "Google Arcade Swag",
     "Skill Badges",
-    "Arcade Calculator",
   ],
   authors: [{ name: "Somesh Tiwari", url: "https://github.com/Somesh520" }],
+  creator: "Somesh Tiwari",
+  publisher: "Somesh Tiwari",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
@@ -39,19 +45,27 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "Arcade Calc",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false, // Prevents zooming for app-like feel
-  },
   openGraph: {
-    title: "Arcade Points Calculator 2026",
-    description: "Check your progress for the Google Cloud Arcade 2026 Season.",
+    title: "Arcade Calculator 2026 by Somesh Tiwari",
+    description: "Check your progress for the Google Cloud Arcade 2026 Season. Developed by Somesh Tiwari.",
     type: "website",
     url: "https://google-arcade-calculator-2026.vercel.app",
-    siteName: "Google Cloud Arcade Points Calculator 2026",
+    siteName: "Arcade Calculator 2026",
     locale: "en_US",
+    images: [
+      {
+        url: "/icon.png", // Start with icon, maybe user wants a specific OG image later
+        width: 1200,
+        height: 630,
+        alt: "Arcade Calculator 2026 by Somesh Tiwari",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arcade Calculator 2026 by Somesh Tiwari",
+    description: "Track your Google Cloud Arcade Points instantly.",
+    creator: "@SomeshTiwari", // Assuming handle, beneficial even if generic
   },
   alternates: {
     canonical: "/",
@@ -67,6 +81,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false, // Prevents zooming for app-like feel
 };
 
 export default function RootLayout({

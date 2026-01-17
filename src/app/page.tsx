@@ -50,8 +50,11 @@ export default function Home() {
         className="text-center mb-12 max-w-3xl flex flex-col items-center"
       >
         <h1 className="text-3xl md:text-5xl font-[family-name:var(--font-press-start)] mb-6 neon-text-pink leading-normal py-4">
-          2026 ARCADE CALCULATOR
+          ARCADE CALCULATOR 2026
         </h1>
+        <div className="mb-6 px-4 py-2 bg-white/5 rounded-full border border-white/10 inline-flex items-center gap-2">
+          <span className="text-xs text-gray-400 font-[family-name:var(--font-outfit)]">Developed by <span className="text-[var(--color-neon-cyan)] font-bold">Somesh Tiwari</span></span>
+        </div>
         <p className="text-gray-400 text-lg md:text-xl">
           Track your Google Cloud Arcade progress, calculate points, and verify milestones.
         </p>
@@ -155,7 +158,7 @@ export default function Home() {
         {/* What is Arcade? */}
         <section>
           <h2 className="text-2xl font-[family-name:var(--font-press-start)] mb-6 text-[var(--color-neon-cyan)]">
-            <span className="text-white">01.</span> WHAT IS GOOGLE ARCADE?
+            <span className="text-white">01.</span> WHAT IS GOOGLE ARCADE & POINTS?
           </h2>
           <div className="arcade-card p-6 rounded-xl text-gray-300 leading-relaxed">
             <p>
@@ -170,7 +173,7 @@ export default function Home() {
         {/* How to Register */}
         <section>
           <h2 className="text-2xl font-[family-name:var(--font-press-start)] mb-6 text-[var(--color-neon-pink)]">
-            <span className="text-white">02.</span> HOW TO REGISTER?
+            <span className="text-white">02.</span> HOW TO REGISTER FOR BADGES?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
@@ -189,7 +192,7 @@ export default function Home() {
         {/* How to Play */}
         <section>
           <h2 className="text-2xl font-[family-name:var(--font-press-start)] mb-6 text-[var(--color-neon-green)]">
-            <span className="text-white">03.</span> HOW TO PLAY?
+            <span className="text-white">03.</span> HOW TO PLAY & EARN?
           </h2>
           <div className="arcade-card p-6 rounded-xl space-y-4">
             <div className="flex items-start gap-4">
@@ -281,7 +284,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Google Cloud Arcade Points Calculator 2026",
+            "name": "Arcade Calculator 2026",
             "applicationCategory": "UtilitiesApplication",
             "operatingSystem": "Web",
             "offers": {
@@ -292,7 +295,12 @@ export default function Home() {
             "description": "Calculate your Google Cloud Skills Boost Arcade points instantly. Track badges, milestones, and rank for the 2026 season.",
             "author": {
               "@type": "Person",
-              "name": "Somesh Tiwari"
+              "name": "Somesh Tiwari",
+              "url": "https://github.com/Somesh520",
+              "sameAs": [
+                "https://www.linkedin.com/in/someshtiwari/",
+                "https://github.com/Somesh520"
+              ]
             }
           }),
         }}
