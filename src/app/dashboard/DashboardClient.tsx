@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowLeft, CheckCircle, Trophy, Medal, Award } from "lucide-react";
 import { ResultData } from "../../types";
 import { motion } from "framer-motion";
+import GameResources from "./GameResources";
 
 export default function DashboardClient() {
     const searchParams = useSearchParams();
@@ -172,7 +173,7 @@ export default function DashboardClient() {
                     </div>
                 </div>
 
-                {/* Facilitator Milestones */}
+
                 <div className="arcade-card p-8 rounded-2xl">
                     <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                         <CheckCircle className="text-[var(--color-neon-cyan)]" /> Facilitator Milestones
@@ -210,6 +211,85 @@ export default function DashboardClient() {
                         ))}
                     </div>
                 </div>
+                {/* Badge Gallery */}
+                <div className="arcade-card p-8 rounded-2xl mb-8">
+                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2 font-[family-name:var(--font-press-start)] text-white">
+                        BADGE GALLERY <span className="text-xs text-gray-500 font-sans font-normal ml-2">({result.badges.filter(b => b.earnedAt.includes('2026')).length} items)</span>
+                    </h3>
+
+                    {/* Game Badges */}
+                    {result.badges.some(b => b.type === 'Game' && b.earnedAt.includes('2026')) && (
+                        <div className="mb-8">
+                            <h4 className="text-[var(--color-neon-green)] font-bold mb-4 border-b border-gray-700 pb-2">GAMES</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {result.badges.filter(b => b.type === 'Game' && b.earnedAt.includes('2026')).map((badge, i) => (
+                                    <div key={i} className="bg-black/40 p-3 rounded-lg flex flex-col items-center text-center">
+                                        <img src={badge.image} alt={badge.name} className="w-16 h-16 mb-2" />
+                                        <p className="text-xs font-bold leading-tight line-clamp-2" title={badge.name}>{badge.name}</p>
+                                        <p className="text-[10px] text-gray-500 mt-1">{badge.earnedAt}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Trivia Badges */}
+                    {result.badges.some(b => b.type === 'Trivia' && b.earnedAt.includes('2026')) && (
+                        <div className="mb-8">
+                            <h4 className="text-[var(--color-neon-purple)] font-bold mb-4 border-b border-gray-700 pb-2">TRIVIA</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {result.badges.filter(b => b.type === 'Trivia' && b.earnedAt.includes('2026')).map((badge, i) => (
+                                    <div key={i} className="bg-black/40 p-3 rounded-lg flex flex-col items-center text-center">
+                                        <img src={badge.image} alt={badge.name} className="w-16 h-16 mb-2" />
+                                        <p className="text-xs font-bold leading-tight line-clamp-2" title={badge.name}>{badge.name}</p>
+                                        <p className="text-[10px] text-gray-500 mt-1">{badge.earnedAt}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Skill Badges */}
+                    {result.badges.some(b => b.type === 'Skill Badge' && b.earnedAt.includes('2026')) && (
+                        <div className="mb-8">
+                            <h4 className="text-[var(--color-neon-blue)] font-bold mb-4 border-b border-gray-700 pb-2">SKILL BADGES</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {result.badges.filter(b => b.type === 'Skill Badge' && b.earnedAt.includes('2026')).map((badge, i) => {
+                                    const isPreAssessment = badge.name.toLowerCase().includes('assessment');
+                                    return (
+                                        <div key={i} className={`bg-black/40 p-3 rounded-lg flex flex-col items-center text-center relative ${isPreAssessment ? 'opacity-75' : ''}`}>
+                                            {isPreAssessment && (
+                                                <div className="absolute top-1 right-1 bg-gray-700 text-[8px] px-1 rounded text-gray-300">NO BONUS</div>
+                                            )}
+                                            <img src={badge.image} alt={badge.name} className="w-16 h-16 mb-2" />
+                                            <p className="text-xs font-bold leading-tight line-clamp-2" title={badge.name}>{badge.name}</p>
+                                            <p className="text-[10px] text-gray-500 mt-1">{badge.earnedAt}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Course Badges / Others */}
+                    {result.badges.some(b => (b.type === 'Course' || b.type === 'Other') && b.earnedAt.includes('2026')) && (
+                        <div>
+                            <h4 className="text-gray-400 font-bold mb-4 border-b border-gray-700 pb-2">COURSES & OTHERS</h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                {result.badges.filter(b => (b.type === 'Course' || b.type === 'Other') && b.earnedAt.includes('2026')).map((badge, i) => (
+                                    <div key={i} className="bg-black/40 p-3 rounded-lg flex flex-col items-center text-center opacity-60">
+                                        <img src={badge.image} alt={badge.name} className="w-16 h-16 mb-2 grayscale" />
+                                        <p className="text-xs font-bold leading-tight line-clamp-2" title={badge.name}>{badge.name}</p>
+                                        <p className="text-[10px] text-gray-500 mt-1">{badge.earnedAt}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Game Resources Section */}
+                <GameResources userBadges={result.badges} />
             </motion.div>
         </main>
     );

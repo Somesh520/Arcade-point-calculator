@@ -86,12 +86,27 @@ export async function POST(req: Request) {
       const name = $(el).find('.ql-title-medium').text().trim();
       const image = $(el).find('img').attr('src') || '';
       const dateStr = $(el).find('.ql-body-medium').text().trim();
-      // Logic to classify badges
+
+      // Detailed classification logic
       let type: Badge['type'] = 'Other';
-      if (name.toLowerCase().includes('game')) type = 'Game';
-      else if (name.toLowerCase().includes('trivia')) type = 'Trivia';
-      else if (name.toLowerCase().includes('assessment') || name.toLowerCase().includes('skill badge')) type = 'Skill Badge';
-      else if (name.toLowerCase().includes('course')) type = 'Course';
+      const lowerName = name.toLowerCase();
+
+      if (lowerName.includes('trivia')) {
+        type = 'Trivia';
+      } else if (lowerName.includes('game')) {
+        type = 'Game';
+      } else if (lowerName.includes('assessment')) {
+        // Pre-assessments often don't count for points in the same way, or user wants them marked
+        type = 'Skill Badge';
+      } else if (lowerName.includes('skill badge')) {
+        type = 'Skill Badge';
+      } else if (lowerName.includes('course')) {
+        type = 'Course';
+      }
+
+      // Add a flag for "No Bonus" if needed, but for now relies on type filtering in frontend or here
+      // The user specifically asked to "mark them" if they don't count. 
+      // We will handle the visual marking in the frontend based on the name or type.
 
       badges.push({ name, image, earnedAt: dateStr, type });
     });
