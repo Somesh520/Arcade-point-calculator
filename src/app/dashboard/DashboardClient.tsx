@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, CheckCircle, Trophy, Medal, Award } from "lucide-react";
+import { ArrowLeft, CheckCircle, Trophy, Medal, Award, AlertTriangle } from "lucide-react";
 import { ResultData } from "../../types";
 import { motion } from "framer-motion";
 import GameResources from "./GameResources";
@@ -69,10 +69,37 @@ export default function DashboardClient() {
 
     if (error) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen text-center p-4">
-                <h2 className="text-red-500 font-bold mb-4">ERROR</h2>
-                <p className="mb-6">{error}</p>
-                <button onClick={() => router.push("/")} className="underline text-gray-400">Back to Home</button>
+            <div className="flex flex-col items-center justify-center min-h-screen p-4 font-[family-name:var(--font-outfit)]">
+                <div className="arcade-card p-8 rounded-2xl border-2 border-red-500 max-w-md w-full text-center relative overflow-hidden backdrop-blur-xl bg-black/80 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50"></div>
+
+                    <div className="mb-6 flex justify-center">
+                        <div className="p-4 bg-red-500/10 rounded-full border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.4)]">
+                            <AlertTriangle size={48} className="text-red-500 animate-pulse" />
+                        </div>
+                    </div>
+
+                    <h2 className="text-2xl font-bold mb-2 text-red-500 font-[family-name:var(--font-press-start)] tracking-widest uppercase drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                        SYSTEM ERROR
+                    </h2>
+
+                    <div className="w-full h-px bg-red-500/30 my-6"></div>
+
+                    <p className="mb-8 text-gray-300 font-mono text-sm leading-relaxed border border-red-500/20 bg-black/50 p-4 rounded">
+                        {error}
+                    </p>
+
+                    <button
+                        onClick={() => router.push("/")}
+                        className="group relative px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-[family-name:var(--font-press-start)] text-xs rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] w-full overflow-hidden"
+                    >
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                            RETURN TO BASE
+                        </span>
+                    </button>
+
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50"></div>
+                </div>
             </div>
         );
     }

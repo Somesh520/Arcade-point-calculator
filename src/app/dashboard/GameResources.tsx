@@ -96,10 +96,7 @@ export default function GameResources({ userBadges }: GameResourcesProps) {
         fetchGames();
     }, []);
 
-    const copyToClipboard = (text: string) => {
-        navigator.clipboard.writeText(text);
-        // You might want to add a toast or visual feedback here
-    };
+    // copyToClipboard logic moved to CopyButton component
 
     if (loading) {
         return (
@@ -163,12 +160,7 @@ export default function GameResources({ userBadges }: GameResourcesProps) {
                                         <td className="p-3">{game.points}</td>
                                         <td className="p-3 font-mono text-gray-400">{game.labNumber}</td>
                                         <td className="p-3">
-                                            <button
-                                                onClick={() => copyToClipboard(game.accessCode)}
-                                                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-3 py-1 rounded transition-colors font-mono text-[var(--color-neon-cyan)]"
-                                            >
-                                                {game.accessCode} <Copy size={12} />
-                                            </button>
+                                            <CopyButton code={game.accessCode} />
                                         </td>
                                     </tr>
                                 );
@@ -187,5 +179,28 @@ export default function GameResources({ userBadges }: GameResourcesProps) {
                 *Access codes are community sourced. Mark badges as "No Bonus" if explicitly stated in game rules.
             </p>
         </div>
+    );
+}
+
+function CopyButton({ code }: { code: string }) {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <button
+            onClick={handleCopy}
+            className={`flex items-center gap-2 px-3 py-1 rounded transition-all font-mono text-xs ${copied
+                ? "bg-[var(--color-neon-green)]/20 text-[var(--color-neon-green)] ring-1 ring-[var(--color-neon-green)]"
+                : "bg-white/10 hover:bg-white/20 text-[var(--color-neon-cyan)]"
+                }`}
+        >
+            {code}
+            {copied ? <CheckCircle size={12} /> : <Copy size={12} />}
+        </button>
     );
 }
